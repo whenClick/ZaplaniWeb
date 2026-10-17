@@ -86,12 +86,26 @@
       #root * {
         font-family: 'Nunito', ionicons, ui-rounded, system-ui, sans-serif;
       }
+      /* Anything pressed, held or dragged: no text selection, magnifier or Safari's copy bar on a
+         long press (quick actions, bar drag). Text fields keep their own selection. */
+      #root [role='button'],
+      #root [role='checkbox'],
+      #root [role='menuitem'],
+      #root [role='tab'],
+      #root [role='radio'],
+      #root [role='switch'],
+      #root [role='adjustable'],
+      #root [role='slider'] {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+      }
     </style>
   <link rel="icon" href="/ZaplaniWeb/favicon.ico"/></head>
 
   <body>
     <noscript>Для работы ZaPlani нужен JavaScript.</noscript>
     <div id="root"></div>
-  <script src="/ZaplaniWeb/_expo/static/js/web/entry-ac6435544320ca0083b108856872eb24.js" defer></script>
+  <script src="/ZaplaniWeb/_expo/static/js/web/entry-77405630e1a54eda3b1d1040db852c6c.js" defer></script>
 </body>
 </html>
