@@ -86,29 +86,38 @@
       #root * {
         font-family: 'Nunito', ionicons, ui-rounded, system-ui, sans-serif;
       }
-      /* Nothing in the app is selected by a long press: no highlighted text, magnifier or Safari's
-         copy bar under quick actions or a drag, wherever the finger lands (react-native-web gives
-         its own text nodes a selectable style, so a rule on the pressables alone did not reach
-         them). Text fields keep their own selection. */
-      #root,
-      #root * {
+      /* Nothing on the page is selected by a long press: no highlighted text, magnifier or
+         Safari's copy bar under quick actions or a drag, wherever the finger lands. The whole
+         document, not only #root: menus, dialogs and cards (react-native-web's Modal) are drawn in
+         their own node in body. Text fields keep their own selection. */
+      html,
+      body,
+      body * {
         -webkit-user-select: none !important;
         user-select: none !important;
         -webkit-touch-callout: none !important;
       }
-      #root input,
-      #root textarea,
-      #root [contenteditable='true'] {
+      input,
+      textarea,
+      [contenteditable='true'] {
         -webkit-user-select: text !important;
         user-select: text !important;
         -webkit-touch-callout: default !important;
       }
     </style>
+    <script>
+      // A long press in Safari can start a selection before any style applies (from the icon on
+      // the Home Screen too): no selection starts outside a text field.
+      document.addEventListener('selectstart', function (e) {
+        var t = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement;
+        if (!t || !t.closest('input, textarea, [contenteditable="true"]')) e.preventDefault();
+      });
+    </script>
   <link rel="icon" href="/ZaplaniWeb/favicon.ico"/></head>
 
   <body>
     <noscript>Для работы ZaPlani нужен JavaScript.</noscript>
     <div id="root"></div>
-  <script src="/ZaplaniWeb/_expo/static/js/web/entry-f71181408dc880dafd506317cd4c2d3d.js" defer></script>
+  <script src="/ZaplaniWeb/_expo/static/js/web/entry-7eabb5a5fa1d07ec43b1d185611a6079.js" defer></script>
 </body>
 </html>
